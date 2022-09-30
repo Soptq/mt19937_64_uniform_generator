@@ -4,7 +4,6 @@ js: src/19937.cc
 		-o dist/19937.js \
 		src/19937.cc \
 		-s EXPORTED_FUNCTIONS="[ \
-			'_ReturnNumericLimits', \
 			'_CreateRand', \
 			'_Generate', \
 			'_FreeRand' \

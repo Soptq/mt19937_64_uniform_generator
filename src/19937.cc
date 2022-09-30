@@ -1,26 +1,22 @@
 #include <random>
 
 struct MyRand {
-  std::mt19937 gen;
-  std::uniform_int_distribution<int> dis;
+  std::mt19937_64 gen;
+  std::uniform_int_distribution<uint64_t> dis;
 
-  MyRand(int min, int max, int seed) : dis(min, max) { gen.seed(seed); }
+  MyRand(uint64_t min, uint64_t max, uint32_t seed) : dis(min, max) { gen.seed(seed); }
 };
 
 extern "C" {
 
-const int NUMERIC_LIMITS = std::numeric_limits<int>::max();
+const uint64_t NUMERIC_LIMITS = std::numeric_limits<uint64_t>::max();
 
-int ReturnNumericLimits() {
-  return NUMERIC_LIMITS;
-}
-
-MyRand* CreateRand(int min = 0, int max = NUMERIC_LIMITS, int seed = 0) {
+MyRand* CreateRand(uint64_t min = 0, uint64_t max = NUMERIC_LIMITS, uint32_t seed = 0) {
   MyRand* rand = new MyRand(min, max, seed);
   return rand;
 }
 
-int Generate(MyRand* rand) {
+uint64_t Generate(MyRand* rand) {
   return rand->dis(rand->gen);
 }
 
